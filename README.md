@@ -15,6 +15,19 @@ taking pictures and for choosing images from the system's image library.
 
 Source: [cordova-plugin-barcodescanner](https://github.com/apache/cordova-plugin-barcodescanner)
 
+## Repository branches and tags
+
+We are migrating bindings from
+[js_of_ocaml](https://github.com/ocsigen/js_of_ocaml) (low level bindings) to
+[gen_js_api](https://github.com/lexifi/gen_js_api) (high level bindings).
+
+The gen_js_api binding allows to use *pure* ocaml types (you don't have to use
+the ## syntax from js_of_ocaml or Js.string type but only # and string type).
+
+The js_of_ocaml version is available in the branch
+[*js_of_ocaml*](https://github.com/dannywillems/ocaml-cordova-plugin-barcodescanner/tree/js_of_ocaml)
+but we **recommend** to use the gen_js_api version which is the master branch.
+
 ## How to use ?
 
 TODO
@@ -28,13 +41,13 @@ We don't provide a *barcode_scanner* variable in this plugin (as said in the off
 documentation on js_of_ocaml). If we did, *barcode_scanner* will be set to **undefined**
 because the *barcodeScanner* object doesn't exist when we create the variable.
 
-Instead, we provide a function *barcode_scanner* of type *unit -> barcode_scanner Js.t* which creates the
-binding to the *barcodeScanner* object. You must call it when the deviceready
+Instead, we provide a function *Barcodescanner.t* of type *unit -> Barcodescanner.barcode_scanner* which creates the
+binding to the *barcodeScanner* js object. You must call it when the deviceready
 event is handled, eg
 
 ```OCaml
-let on_device_ready =
-  let barcodescanner = Barcodescanner.barcode_scanner () in
+let on_device_ready _ =
+  let barcodescanner = Barcodescanner.t () in
   (* Some code *)
 
 let _ =

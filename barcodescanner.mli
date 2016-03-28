@@ -1,4 +1,5 @@
 (* -------------------------------------------------------------------------- *)
+[@@@js.stop]
 type encode_format
 
 val encode_email          : encode_format
@@ -6,44 +7,73 @@ val encode_sms            : encode_format
 val encode_text           : encode_format
 val encode_phone          : encode_format
 
-val encode_format_to_str  : encode_format -> Js.js_string Js.t
+val encode_format_to_str  : encode_format -> string
+[@@@js.start]
+
+[@@@js.implem
+type encode_format  =
+    | Text
+    | Phone
+    | Email
+    | Sms
+
+let encode_text     = Text
+let encode_phone    = Phone
+let encode_email    = Email
+let encode_sms      = Sms
+
+let encode_format_to_str f = match f with
+  | Text    -> "TEXT_TYPE"
+  | Phone   -> "PHONE_TYPE"
+  | Email   -> "EMAIL_TYPE"
+  | Sms     -> "SMS_TYPE"
+]
 (* -------------------------------------------------------------------------- *)
 
 (* -------------------------------------------------------------------------- *)
-type result =
-  <
-    text        : Js.js_string Js.t Js.readonly_prop ;
-    format_     : Js.js_string Js.t Js.readonly_prop ;
-    cancelled   : bool Js.t Js.readonly_prop
-  > Js.t
-(* -------------------------------------------------------------------------- *)
-
-(* -------------------------------------------------------------------------- *)
-class type barcode_scanner =
+class result : Ojs.t ->
   object
+    inherit Ojs.obj
+
+    method text       : string
+    method format     : string
+    method cancelled  : bool
+  end
+(* -------------------------------------------------------------------------- *)
+
+(* -------------------------------------------------------------------------- *)
+class barcode_scanner : Ojs.t ->
+  object
+    inherit Ojs.obj
+
     (* ---------------------------------------------------------------------- *)
     (* scan [success_callback] *)
-    method scan       : (result -> unit) -> unit Js.meth
+    method scan       : (result -> unit) -> unit
+    [@@js.call "scan"]
     (* scan [success_callback] [error_callback] *)
     method scan_err   : (result -> unit) ->
-                        (Js.js_string Js.t -> unit) ->
-                        unit Js.meth
+                        (string -> unit) ->
+                        unit
+    [@@js.call "scan"]
     (* ---------------------------------------------------------------------- *)
 
     (* ---------------------------------------------------------------------- *)
     (* encore [type] [data] [success_callback] *)
-    method encode     : Js.js_string Js.t -> Js.js_string Js.t ->
-                        (Js.js_string Js.t -> unit) ->
-                        unit Js.meth
+    method encode     : string -> string ->
+                        (string -> unit) ->
+                        unit
+    [@@js.call "encode"]
     (* encore [type] [data] [success_callback] [error_callback] *)
-    method encode_err : Js.js_string Js.t -> Js.js_string Js.t ->
-                        (Js.js_string Js.t -> unit) ->
-                        (Js.js_string Js.t -> unit) ->
-                        unit Js.meth
+    method encode_err : string -> string ->
+                        (string -> unit) ->
+                        (string -> unit) ->
+                        unit
+    [@@js.call "encode"]
     (* ---------------------------------------------------------------------- *)
   end
 (* -------------------------------------------------------------------------- *)
 
 (* -------------------------------------------------------------------------- *)
-val barcode_scanner : unit -> barcode_scanner Js.t
+val t : unit -> barcode_scanner
+[@@js.get "cordova.plugins.barcodeScanner"]
 (* -------------------------------------------------------------------------- *)
