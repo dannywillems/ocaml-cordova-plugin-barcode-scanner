@@ -1,32 +1,23 @@
 (* -------------------------------------------------------------------------- *)
-[@@@js.stop]
-type encode_format
+type encode_format  =
+  | Text  [@js "TEXT_TYPE"]
+  | Phone [@js "PHONE_TYPE"]
+  | Email [@js "EMAIL_TYPE"]
+  | Sms   [@js "SMS_TYPE"]
+  [@@js.enum]
 
+[@@@js.stop]
 val encode_email          : encode_format
 val encode_sms            : encode_format
 val encode_text           : encode_format
 val encode_phone          : encode_format
-
-val encode_format_to_str  : encode_format -> string
 [@@@js.start]
 
 [@@@js.implem
-type encode_format  =
-    | Text
-    | Phone
-    | Email
-    | Sms
-
 let encode_text     = Text
 let encode_phone    = Phone
 let encode_email    = Email
 let encode_sms      = Sms
-
-let encode_format_to_str f = match f with
-  | Text    -> "TEXT_TYPE"
-  | Phone   -> "PHONE_TYPE"
-  | Email   -> "EMAIL_TYPE"
-  | Sms     -> "SMS_TYPE"
 ]
 (* -------------------------------------------------------------------------- *)
 
@@ -48,7 +39,8 @@ class barcode_scanner : Ojs.t ->
 
     (* ---------------------------------------------------------------------- *)
     (* scan [success_callback] *)
-    method scan       : (result -> unit) -> unit
+    method scan       : (result -> unit) ->
+                        unit
     [@@js.call "scan"]
     (* scan [success_callback] [error_callback] *)
     method scan_err   : (result -> unit) ->
