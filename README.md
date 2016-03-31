@@ -41,13 +41,13 @@ We don't provide a *barcode_scanner* variable in this plugin (as said in the off
 documentation on js_of_ocaml). If we did, *barcode_scanner* will be set to **undefined**
 because the *barcodeScanner* object doesn't exist when we create the variable.
 
-Instead, we provide a function *Barcodescanner.t* of type *unit -> Barcodescanner.barcode_scanner* which creates the
+Instead, we provide a function *Barcode_scanner.t* of type *unit -> Barcode_scanner.barcode_scanner* which creates the
 binding to the *barcodeScanner* js object. You must call it when the deviceready
 event is handled, eg
 
 ```OCaml
 let on_device_ready _ =
-  let barcodescanner = Barcodescanner.t () in
+  let barcodescanner = Barcode_scanner.t () in
   (* Some code *)
 
 let _ =
