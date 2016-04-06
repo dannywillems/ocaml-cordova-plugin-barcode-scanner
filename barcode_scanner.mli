@@ -38,29 +38,21 @@ class barcode_scanner : Ojs.t ->
     inherit Ojs.obj
 
     (* ---------------------------------------------------------------------- *)
-    (* scan [success_callback] *)
-    method scan       : (result -> unit) ->
-                        unit
-    [@@js.call "scan"]
-    (* scan [success_callback] [error_callback] *)
-    method scan_err   : (result -> unit) ->
-                        (string -> unit) ->
-                        unit
-    [@@js.call "scan"]
+    (* scan [success_callback] ?[error_callback] *)
+    method scan   : (result -> unit)                                        ->
+                    ?err_cb:((string -> unit) [@js.default (fun e -> ())])  ->
+                    unit                                                    ->
+                    unit
     (* ---------------------------------------------------------------------- *)
 
     (* ---------------------------------------------------------------------- *)
-    (* encore [type] [data] [success_callback] *)
-    method encode     : string -> string ->
-                        (string -> unit) ->
-                        unit
-    [@@js.call "encode"]
-    (* encore [type] [data] [success_callback] [error_callback] *)
-    method encode_err : string -> string ->
-                        (string -> unit) ->
-                        (string -> unit) ->
-                        unit
-    [@@js.call "encode"]
+    (* encore [type] [data] [success_callback] ?[error_callback] *)
+    method encode : string                                                  ->
+                    string                                                  ->
+                    (string -> unit)                                        ->
+                    ?err_cb:((string -> unit) [@js.default (fun e -> ())])  ->
+                    unit                                                    ->
+                    unit
     (* ---------------------------------------------------------------------- *)
   end
 (* -------------------------------------------------------------------------- *)
