@@ -1,1 +1,2 @@
-let t = Barcode_scanner.t () in t#scan (fun r -> r#text ^ r#format) ()
+let t = Barcode_scanner.t () in
+t#scan (fun r -> print_endline (r#text ^ r#format)) ()
