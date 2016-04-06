@@ -1,5 +1,7 @@
 # ocaml-cordova-plugin-barcodescanner
 
+* gen_js_api (master branch): [![Build Status](https://travis-ci.org/dannywillems/ocaml-cordova-plugin-barcodescanner.svg?branch=master)](https://travis-ci.org/dannywillems/ocaml-cordova-plugin-barcodescanner)
+
 Binding to
 [cordova-plugin-barcodescanner](https://github.com/apache/cordova-plugin-barcodescanner)
 
