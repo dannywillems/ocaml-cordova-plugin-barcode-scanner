@@ -33,4 +33,5 @@ eval `opam config env`
 opam install $OPAM_PKGS
 
 export OCAMLRUNPARAM=b
+opam pin add lwt https://github.com/Drup/lwt.git#4.03.0-no-oasis
 make
