@@ -62,13 +62,13 @@ See the official documentation
 The plugin creates a new object called *barcodeScanner*, but the object is
 available when the *deviceready* event is handled.
 
-We provide a function *Barcode_scanner.t* of type *unit -> Barcode_scanner.barcode_scanner* which creates the
+We provide a function *Cordova_barcode_scanner.t* of type *unit -> Cordova_barcode_scanner.barcode_scanner* which creates the
 binding to the *barcodeScanner* js object. You must call it when the deviceready
 event is handled, eg (with js_of_ocaml)
 
 ```OCaml
 let on_device_ready _ =
-  let barcodescanner = Barcode_scanner.t () in
+  let barcodescanner = Cordova_barcode_scanner.t () in
   (* Some code *)
 
 let _ =

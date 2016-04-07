@@ -1,5 +1,5 @@
 ################################################################################
-MLI_FILE		= barcode_scanner.mli
+MLI_FILE		= cordova_barcode_scanner.mli
 ## Name which will be used in -package with ocamlfind
 LIB_NAME		= cordova-plugin-barcode-scanner
 ################################################################################
