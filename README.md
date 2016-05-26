@@ -57,21 +57,3 @@ phonegap plugin add phonegap-plugin-barcodescanner
 
 See the official documentation
 [cordova-plugin-barcodescanner](https://github.com/phonegap/phonegap-plugin-barcodescanner)
-
-## ! BE CAREFUL !
-
-The plugin creates a new object called *barcodeScanner*, but the object is
-available when the *deviceready* event is handled.
-
-We provide a function *Cordova_barcode_scanner.t* of type *unit -> Cordova_barcode_scanner.barcode_scanner* which creates the
-binding to the *barcodeScanner* js object. You must call it when the deviceready
-event is handled.
-By using the [binding to the cordova
-object](https://github.com/dannywillems/ocaml-cordova), you need to use
-
-```OCaml
-let on_device_ready () =
-  let b = Cordova_barcode_scanner.t () in
-  (* Some code *)
-
-let _ = Cordova.Event.device_ready on_device_ready
