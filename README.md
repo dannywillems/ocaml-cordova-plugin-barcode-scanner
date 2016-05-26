@@ -65,14 +65,13 @@ available when the *deviceready* event is handled.
 
 We provide a function *Cordova_barcode_scanner.t* of type *unit -> Cordova_barcode_scanner.barcode_scanner* which creates the
 binding to the *barcodeScanner* js object. You must call it when the deviceready
-event is handled, eg (with js_of_ocaml)
+event is handled.
+By using the [binding to the cordova
+object](https://github.com/dannywillems/ocaml-cordova), you need to use
 
 ```OCaml
-let on_device_ready _ =
-  let barcodescanner = Cordova_barcode_scanner.t () in
+let on_device_ready () =
+  let b = Cordova_barcode_scanner.t () in
   (* Some code *)
 
-let _ =
-  Dom.addEventListener Dom_html.document (Dom.Event.make "deviceready")
-  (Dom_html.handler on_device_ready) Js._false
-```
+let _ = Cordova.Event.device_ready on_device_ready
