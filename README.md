@@ -1,13 +1,13 @@
 # ocaml-cordova-plugin-barcodescanner
 
-[![LGPL-v3 licensed](https://img.shields.io/badge/license-LGPLv3-blue.svg)](https://raw.githubusercontent.com/dannywillems/ocaml-cordova-plugin-barcodescanner/master/LICENSE)
-[![Build Status](https://travis-ci.org/dannywillems/ocaml-cordova-plugin-barcodescanner.svg?branch=master)](https://travis-ci.org/dannywillems/ocaml-cordova-plugin-barcodescanner)
+[![LGPL-v3 licensed](https://img.shields.io/badge/license-LGPLv3-blue.svg)](https://raw.githubusercontent.com/dannywillems/ocaml-cordova-plugin-barcode-scanner/master/LICENSE)
+[![Build Status](https://travis-ci.org/dannywillems/ocaml-cordova-plugin-barcode-scanner.svg?branch=master)](https://travis-ci.org/dannywillems/ocaml-cordova-plugin-barcode-scanner)
 
 Binding to
 [cordova-plugin-barcodescanner](https://github.com/apache/cordova-plugin-barcodescanner)
 
 [Example
-application](https://github.com/dannywillems/ocaml-cordova-plugin-barcodescanner-example).
+application](https://github.com/dannywillems/ocaml-cordova-plugin-barcode-scanner-example).
 
 ## What does cordova-plugin-barcodescanner do ?
 
@@ -18,19 +18,6 @@ taking pictures and for choosing images from the system's image library.
 
 Source: [cordova-plugin-barcodescanner](https://github.com/apache/cordova-plugin-barcodescanner)
 
-## Repository branches and tags
-
-We are migrating bindings from
-[js_of_ocaml](https://github.com/ocsigen/js_of_ocaml) (low level bindings) to
-[gen_js_api](https://github.com/lexifi/gen_js_api) (high level bindings).
-
-The gen_js_api binding allows to use *pure* ocaml types (you don't have to use
-the ## syntax from js_of_ocaml or Js.string type but only # and string type).
-
-The js_of_ocaml version is available in the branch
-[*js_of_ocaml*](https://github.com/dannywillems/ocaml-cordova-plugin-barcodescanner/tree/js_of_ocaml)
-but we **recommend** to use the gen_js_api version which is the master branch.
-
 ## How to install and compile your project by using this plugin ?
 
 Don't forget to switch to a compiler **>= 4.03.0**.
@@ -38,9 +25,16 @@ Don't forget to switch to a compiler **>= 4.03.0**.
 opam switch 4.03.0
 ```
 
-You can use opam by pinning the repository with
+* if you added
+[ocaml-cordova-plugin-list](https://github.com/dannywillems/ocaml-cordova-plugin-list)
+as opam package provider, you can use
+```
+opam install cordova-plugin-barcode-scanner
+```
+
+* Else, you can use opam by pinning the repository with
 ```Shell
-opam pin add cordova-plugin-barcode-scanner https://github.com/dannywillems/ocaml-cordova-plugin-barcodescanner.git
+opam pin add cordova-plugin-barcode-scanner https://github.com/dannywillems/ocaml-cordova-plugin-barcode-scanner.git
 ```
 
 and to compile your project, use
@@ -48,9 +42,9 @@ and to compile your project, use
 ocamlfind ocamlc -c -o [output_file] -package gen_js_api -package cordova-plugin-barcode-scanner [...] -linkpkg [other arguments]
 ```
 
-Don't forget to install the cordova plugin barcodescanner with
+Don't forget to install cordova-plugin-barcodescanner with
 ```Shell
-phonegap plugin add phonegap-plugin-barcodescanner
+cordova plugin add cordova-plugin-barcodescanner
 ```
 
 ## How to use ?
