@@ -22,42 +22,32 @@ let encode_sms      = Sms
 (* -------------------------------------------------------------------------- *)
 
 (* -------------------------------------------------------------------------- *)
-class result : Ojs.t ->
-  object
-    inherit Ojs.obj
+type result = Ojs.t
 
-    method text       : string
-    method format     : string
-    method cancelled  : bool
-  end
+val result_text       : result -> string
+[@@js.get "text"]
+
+val result_format     : result -> string
+[@@js.get "format"]
+
+val result_cancelled  : result -> bool
+[@@js.get "cancelled"]
 (* -------------------------------------------------------------------------- *)
 
 (* -------------------------------------------------------------------------- *)
-class barcode_scanner : Ojs.t ->
-  object
-    inherit Ojs.obj
+(* scan [success_callback] ?[error_callback] *)
+val scan   :  (result -> unit)                                        ->
+              ?err_cb:((string -> unit) [@js.default (fun e -> ())])  ->
+              unit                                                    ->
+              unit
+[@@js.global "cordova.plugins.barcodeScanner.scan"]
 
-    (* ---------------------------------------------------------------------- *)
-    (* scan [success_callback] ?[error_callback] *)
-    method scan   : (result -> unit)                                        ->
-                    ?err_cb:((string -> unit) [@js.default (fun e -> ())])  ->
-                    unit                                                    ->
-                    unit
-    (* ---------------------------------------------------------------------- *)
-
-    (* ---------------------------------------------------------------------- *)
-    (* encore [type] [data] [success_callback] ?[error_callback] *)
-    method encode : string                                                  ->
-                    string                                                  ->
-                    (string -> unit)                                        ->
-                    ?err_cb:((string -> unit) [@js.default (fun e -> ())])  ->
-                    unit                                                    ->
-                    unit
-    (* ---------------------------------------------------------------------- *)
-  end
-(* -------------------------------------------------------------------------- *)
-
-(* -------------------------------------------------------------------------- *)
-val t : unit -> barcode_scanner
-[@@js.get "cordova.plugins.barcodeScanner"]
+(* encode [type] [data] [success_callback] ?[error_callback] *)
+val encode :  string                                                  ->
+              string                                                  ->
+              (string -> unit)                                        ->
+              ?err_cb:((string -> unit) [@js.default (fun e -> ())])  ->
+              unit                                                    ->
+              unit
+[@@js.global "cordova.plugins.barcodeScanner.encode"]
 (* -------------------------------------------------------------------------- *)
