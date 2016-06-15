@@ -22,7 +22,7 @@ let encode_sms      = Sms
 (* -------------------------------------------------------------------------- *)
 
 (* -------------------------------------------------------------------------- *)
-type result = Ojs.t
+type result = private Ojs.t
 
 val result_text       : result -> string
 [@@js.get "text"]
