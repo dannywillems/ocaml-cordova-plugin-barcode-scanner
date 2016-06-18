@@ -1,7 +1,7 @@
 opam-version: "1.2"
 maintainer: "Danny Willems <contact@danny-willems.be>"
 authors: "Danny Willems <contact@danny-willems.be>"
-version: "dev"
+version: "1.0"
 homepage:
   "https://github.com/dannywillems/ocaml-cordova-plugin-barcode-scanner"
 bug-reports:
